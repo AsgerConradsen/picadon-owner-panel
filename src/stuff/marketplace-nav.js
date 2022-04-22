@@ -33,7 +33,7 @@ import {
 const actions = [
     {
         title: 'Visit marketplace',
-        href: 'https://focused-marketplace.herokuapp.com/',
+        href: 'https://picadon-marketplace.herokuapp.com/',
         icon: ClockIcon,
         iconForeground: 'text-teal-700',
         iconBackground: 'bg-teal-50',
