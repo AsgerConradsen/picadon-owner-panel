@@ -17,6 +17,7 @@ import ThemeBox from './components/themeBox'
 import { Link } from "react-router-dom";
 import apiClient from "../../http-common"
 import formApiClient from "../../http-form-data"
+import ImgDropzone from './components/imgDropzone'
 import {
     useQuery,
     useMutation,
@@ -35,10 +36,12 @@ const navigation = [
 ]
 
 const steps = [
-    { name: 'Account Info', href: '#', status: 'complete' },
-    { name: 'Theme', href: '#', status: 'current' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Account Info', href: '/register/account-info', status: 'complete' },
+    { name: 'Theme', href: '/register/theme', status: 'current' },
+    { name: 'Overview', href: '/register/overview', status: 'upcoming' },
 ]
+
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -49,6 +52,8 @@ export default function Example(props) {
 
     const { isLoading: isLoadingPut, isSuccess, isError: isErrorPut, data: dataPut, error: errorPut, mutate } = useMutation(
         async () => { return await formApiClient.put(url, image); });
+
+    const watchLogo = props.watch("logoUrl", "");
 
     async function onImageChange(e) {
         setImage(e.target.files[0])
@@ -77,52 +82,7 @@ export default function Example(props) {
                             </div>
                             <form className="max-w-2xl px-4 sm:px-6 md:px-20">
                                 <ThemeBox register={props.register} control={props.control} />
-
-
-                                <h1 className=" mt-10 font-medium text-gray-700">Upload logo</h1>
-
-                                
-                                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5">
-                                    <div className="mt-1 sm:mt-0 sm:col-span-2">
-
-                                        <div className="max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                            <div className="space-y-1 text-center">
-                                                <svg
-                                                    className="mx-auto h-12 w-12 text-gray-400"
-                                                    stroke="currentColor"
-                                                    fill="none"
-                                                    viewBox="0 0 48 48"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                        strokeWidth={2}
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    />
-                                                </svg>
-                                                <div className="flex text-sm text-gray-600">
-                                                    <label
-                                                        htmlFor="file-upload"
-                                                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                                                    >
-                                                        <span>Upload a file</span>
-                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={onImageChange} />
-                                                    </label>
-                                                    <p className="pl-1">or drag and drop</p>
-                                                </div>
-                                                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-
-
-
+                                <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Image 1*" name="logoUrl" />
 
                                 <div>
                                     <Link to={'/register/account-info'}>

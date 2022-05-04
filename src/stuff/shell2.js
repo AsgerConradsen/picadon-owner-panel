@@ -6,7 +6,8 @@ import { BellIcon, MenuIcon, XIcon, UserCircleIcon } from '@heroicons/react/outl
 import {
     BrowserRouter as Router,
     Route,
-    Routes
+    Routes,
+    NavLink
 } from 'react-router-dom';
 
 import MarketplaceList from './marketplaces'
@@ -14,6 +15,7 @@ import MarketplaceOverview from './marketplace-overview2'
 import Breadcrumbs from './breadCrumbs'
 import ProductPreview from './product-preview'
 import { ReactSVG } from 'react-svg'
+import TenantPage from './TenantPage';
 
 
 const user = {
@@ -24,10 +26,7 @@ const user = {
 }
 const navigation = [
     { name: 'Marketplaces', href: '/home/marketplaces', current: true },
-    { name: 'Services', href: '#', current: false },
-    { name: 'Gifts', href: '#', current: false },
-    { name: 'Products', href: '#', current: false },
-    { name: 'API', href: '#', current: false },
+    { name: 'API', href: '/home/API', current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
@@ -40,22 +39,9 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-
-
-
-
-
-
     return (
         <>
-            {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
+           
             <div className="min-h-full">
                 <Disclosure as="nav" className="bg-indigo-600">
                     {({ open }) => (
@@ -69,25 +55,22 @@ export default function Example() {
                                                 src={localStorage.getItem("logoUrl")}
                                                 alt="Logo"
                                             />
-                                                
+
 
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
-                                                {navigation.map((item) => (
-                                                    <a
-                                                        key={item.name}
-                                                        href={item.href}
-                                                        className={classNames(
-                                                            item.current
-                                                                ? 'bg-indigo-700 text-white'
-                                                                : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                                                            'px-3 py-2 rounded-md text-sm font-medium'
-                                                        )}
-                                                        aria-current={item.current ? 'page' : undefined}
+                                                {navigation.map((item, index) => (
+                                                    <NavLink
+                                                        key={index}
+                                                        to={item.href}
+                                                        className={({ isActive }) => classNames(isActive
+                                                            ? 'bg-indigo-700 text-white'
+                                                            : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
+                                                            'px-3 py-2 rounded-md text-sm font-medium')}
                                                     >
                                                         {item.name}
-                                                    </a>
+                                                    </NavLink>
                                                 ))}
                                             </div>
                                         </div>
@@ -230,8 +213,9 @@ export default function Example() {
                     <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
                         <Routes>
                             <Route path="/marketplaces" element={<MarketplaceList />} />
-                            <Route path="/marketplaces/:marketplaceId" element={<MarketplaceOverview />} />
-                            <Route path="/marketplaces/:marketplaceId/product-preview" element={<ProductPreview />} />
+                            <Route path="/marketplaces/:marketplaceName" element={<MarketplaceOverview />} />
+                            <Route path="/marketplaces/:marketplaceName/product-preview" element={<ProductPreview />} />
+                            <Route path="/marketplaces/:marketplaceName/tenants" element={<TenantPage />} />
                         </Routes>
                     </div>
                 </main>
@@ -240,8 +224,3 @@ export default function Example() {
     )
 }
 
-
-// <Routes>
-//                             <Route path="marketplaces" element={null} />
-//                             <Route path=":marketplaceId" element={<Breadcrumbs/>} />
-//                         </Routes>

@@ -5,6 +5,9 @@ import { Dialog, Popover, RadioGroup, Tab, Transition } from '@headlessui/react'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { Switch } from '@headlessui/react'
 import { useForm, Controller } from "react-hook-form";
+import TenantImportMethodSelect from "./components/TenantImportMethodSelect";
+import CsvDropzone from "./components/CsvDropzone";
+import { tenantsSchema } from "./tenansSchema";
 
 import {
     CalendarIcon,
@@ -66,6 +69,9 @@ export default function Example(props) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [enabled, setEnabled] = useState(false)
     const [selectedSize, setSelectedSize] = useState(product.sizes[0])
+    const [dataSet, setDataSet] = useState(false)
+
+    const watchCsv = props.watch("tenants");
 
     return (
         <>
@@ -78,17 +84,26 @@ export default function Example(props) {
         ```
       */}
             <div>
-                <Modal/>
                 {<Sidebar steps={steps} />}
                 <div className="md:pl-72 flex flex-col flex-1">
-                    <main className="flex-1">
-                        <div className="py-6 flex flex-col">
-                            <div className="max-w-7xl px-4 py-8 sm:px-8 md:px-20">
-                                <h1 className="text-2xl font-semibold text-gray-900">Tenants</h1>
-                                <h2 className="text-l text-gray-500">Review your tenant information</h2>
-                            </div>
-                            <div  className="max-w-5xl px-4 sm:px-6 md:px-20" >
-                                <TenantTable/>
+                    <main className="flex-1 py-6">
+                        <div className="max-w-7xl px-4 py-8 sm:px-8 md:px-20">
+                            <h1 className="text-2xl font-semibold text-gray-900">Tenants</h1>
+                            <h2 className="text-l text-gray-500">Review your tenant information</h2>
+                        </div>
+                        <div className="">
+
+
+
+                            <div className="max-w-5xl px-4 sm:px-6 md:px-20" >
+                                <TenantImportMethodSelect />
+
+                                {/* TODO: only show if csv import selected  */}
+                                <CsvDropzone className="justify-center" setDataSet={setDataSet} error={props.errors?.tenants} schema={tenantsSchema} setValue={props.setValue} watch={watchCsv} label="test1" name="tenants" />
+
+
+
+                                {dataSet ? <TenantTable data={watchCsv} /> : null}
 
 
                                 <div className="mt-16 flex flex-row">

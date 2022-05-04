@@ -30,7 +30,7 @@ const steps = [
     { name: 'Property information', href: '#', status: 'complete' },
     { name: 'Marketplace type', href: '#', status: 'complete' },
     { name: 'Tenant information', href: '#', status: 'complete' },
-    { name: 'Welcome bonus', href: '#', status: 'current' },
+    { name: 'Wallets', href: '#', status: 'current' },
     { name: 'Welcome gift', href: '#', status: 'upcoming' },
     { name: 'Product preview', href: '#', status: 'upcoming' },
     { name: 'Gift configuration', href: '#', status: 'upcoming' },
@@ -62,11 +62,37 @@ export default function Example(props) {
                     <main className="flex-1">
                         <div className="py-6 flex flex-col">
                             <div className="max-w-7xl px-4 py-8 sm:px-8 md:px-20">
-                                <h1 className="text-2xl font-semibold text-gray-900">Welcome bonus</h1>
-                                <h2 className="text-l text-gray-500">Welcome bonus is a starting amount in tenant wallets</h2>
+                                <h1 className="text-2xl font-semibold text-gray-900">Wallets</h1>
+                                <h2 className="text-l text-gray-500">Configure wallets for your tenants</h2>
                             </div>
+
+
+
                             <form onSubmit={props.handleSubmit(props.onSubmit)} className="max-w-xl px-4 sm:px-6 md:px-20" >
-                                <div className='py-2'>
+                                <Switch.Group as="div" className="flex items-center mt-8">
+                                    <Switch
+                                        checked={enabled}
+                                        onChange={setEnabled}
+                                        className={classNames(
+                                            enabled ? 'bg-indigo-600' : 'bg-gray-200',
+                                            'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                        )}
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className={classNames(
+                                                enabled ? 'translate-x-5' : 'translate-x-0',
+                                                'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+                                            )}
+                                        />
+                                    </Switch>
+                                    <Switch.Label as="span" className="ml-3">
+                                        <span className="text-sm font-medium text-gray-900">Enable wallets </span>
+                                        {/* <span className="text-sm text-gray-500">(If this is not set, only current tenants will get the bonus)</span> */}
+                                    </Switch.Label>
+                                </Switch.Group>
+
+                                <div className='py-2 mt-8'>
                                     <label htmlFor="location" className="block text-sm font-medium text-gray-700">
                                         Welcome bonus amount
                                     </label>
@@ -99,7 +125,7 @@ export default function Example(props) {
                                     </select>
                                 </div>
 
-              
+
 
 
                                 <Switch.Group as="div" className="flex items-center mt-8">

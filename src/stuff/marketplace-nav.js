@@ -29,6 +29,8 @@ import {
     ReceiptRefundIcon,
     UsersIcon,
 } from '@heroicons/react/outline'
+import { Link,  useParams, useLocation } from "react-router-dom";
+
 
 const actions = [
     {
@@ -57,7 +59,7 @@ const actions = [
     },
     {
         title: 'Tenants',
-        href: '#',
+        href: '/tenants',
         icon: CashIcon,
         iconForeground: 'text-yellow-700',
         iconBackground: 'bg-yellow-50',
@@ -70,6 +72,9 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+    let location = useLocation();
+
+
     return (
         <div className="mt-7 rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
             {actions.map((action, actionIdx) => (
@@ -96,7 +101,7 @@ export default function Example() {
                     </div>
                     <div className="mt-8">
                         <h3 className="text-lg font-medium">
-                            <a href={action.href} className="focus:outline-none" target="_blank" rel="noopener noreferrer">
+                            <a href={location.pathname + action.href} className="focus:outline-none" target="_blank" rel="noopener noreferrer">
                                 {/* Extend touch target to entire panel */}
                                 <span className="absolute inset-0" aria-hidden="true" />
                                 {action.title}

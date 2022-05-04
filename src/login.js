@@ -4,6 +4,7 @@ import Logo from './logos/Logo-dark-grey.svg'
 import { Link, Navigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import apiClient from "./http-common"
+import jwtDecode from 'jwt-decode';
 import {
     useQuery,
     useMutation,
@@ -13,19 +14,25 @@ import {
 } from 'react-query'
 
 export default function Example() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoginError, setIsLoginError] = useState(false)
 
 
     const mutation = useMutation(formData => { return apiClient.post("/owner-panel/login", formData); },
         {
             onError: (error, variables, context) => {
+                setIsLoginError(true)
                 // An error happened!
                 console.log(`rolling back optimistic update with id ${context.id}`)
             },
             onSuccess: (data, variables, context) => {
-                localStorage.setItem("jwt", data.data.token)
-                localStorage.setItem("logoUrl", data.data.config.logoUrl)
-                setIsLoggedIn(true)
+                localStorage.setItem("token", data.data.token)
+                let decoded = jwtDecode(data.data.token)
+
+                localStorage.setItem("token", data.data.token)
+                localStorage.setItem("userType", decoded.userType)
+                localStorage.setItem("user_id", decoded.user_id)
+                // setIsLoggedIn(true)
             },
         }
     );
@@ -37,9 +44,9 @@ export default function Example() {
         mutation.mutate(formData);
     }
 
-    if (isLoggedIn) {
-        return <Navigate to='/home' />
-    }
+    // if (isLoggedIn) {
+    //     return <Navigate to='/home' />
+    // }
 
     return (
         <>
@@ -95,17 +102,9 @@ export default function Example() {
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
-                                </label>
-                            </div>
+                            <p className="mb-3 self-center text-sm text-red-600" id="email-error">
+                                {isLoginError ? "Incorrect password or email" : null}
+                            </p>
 
                             <div className="text-sm">
                                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">

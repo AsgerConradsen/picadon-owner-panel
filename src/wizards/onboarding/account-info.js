@@ -1,7 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CheckCircleIcon } from '@heroicons/react/solid'
+import TextInput from '../components/TextInput';
 import {
     CalendarIcon,
     ChartBarIcon,
@@ -14,6 +12,7 @@ import {
 } from '@heroicons/react/outline'
 import Sidebar from '../components/sidebar'
 import { Link } from "react-router-dom";
+
 
 const navigation = [
     { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -36,10 +35,12 @@ function classNames(...classes) {
 }
 
 const steps = [
-    { name: 'Account Info', href: '#', status: 'current' },
-    { name: 'Theme', href: '#', status: 'upcoming' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Account Info', href: '/register/account-info', status: 'current' },
+    { name: 'Theme', href: '/register/theme', status: 'upcoming' },
+    { name: 'Overview', href: '/register/overview', status: 'upcoming' },
 ]
+
+
 
 
 export default function Example(props) {
@@ -56,89 +57,40 @@ export default function Example(props) {
                             <h2 className="text-l text-gray-500">Tell us who you are</h2>
                         </div>
                         <form className="max-w-xl px-4 sm:px-6 md:px-20">
-                            <div className='py-2'>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Company name
+
+                            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                    Username
                                 </label>
-                                <div className="mt-1">
-                                    <input
-                                        type="text"
-                                        name="company-name"
-                                        id="company-name"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        placeholder=""
-                                        {...register("companyName")}
-                                    />
+                                <div className="mt-1 sm:mt-0 sm:col-span-2">
+                                    <div className="max-w-lg flex rounded-md shadow-sm">
+                                        <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                            app.picadon.io/
+                                        </span>
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            id="username"
+                                            autoComplete="username"
+                                            className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div className='py-2'>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    CVR
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        type="text"
-                                        name="cvr"
-                                        id="cvr"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        placeholder=""
-                                        {...register("cvr")}
-                                    />
-                                </div>
-                            </div>
-                            <div className='py-2'>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        placeholder=""
-                                        {...register("email")}
-                                    />
-                                </div>
-                            </div>
-                            <div className='py-2'>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Phone number
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        type="tel"
-                                        name="tel-nr"
-                                        id="tel-nr"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        placeholder=""
-                                        {...register("phoneNr")}
-                                    />
-                                </div>
-                            </div>
-                            <div className='py-2'>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Password
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                        placeholder=""
-                                        {...register("password")}
-                                    />
-                                </div>
-                            </div>
+
+
+                            <TextInput type="text" label="Company name*" name="companyName" error={props.errors?.companyName} register={props.register} />
+                            <TextInput type="text" label="CVR*" name="cvr" error={props.errors?.cvr} register={props.register} />
+                            <TextInput type="email" label="Email*" name="email" error={props.errors?.email} register={props.register} />
+                            <TextInput type="tel" label="Phone number*" name="phoneNumber" error={props.errors?.phoneNumber} register={props.register} />
+                            <TextInput type="password" label="Password*" name="password" error={props.errors?.password} register={props.register} />
+
                             <fieldset className="space-y-5">
                                 <legend className="sr-only">Notifications</legend>
                                 <div className="relative flex items-start">
                                     <div className="flex items-center h-5">
                                         <input
-                                            id="comments"
-                                            aria-describedby="comments-description"
-                                            name="comments"
+                                            name="terms"
                                             type="checkbox"
                                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             {...register("acceptTerms")}
@@ -146,16 +98,17 @@ export default function Example(props) {
                                     </div>
                                     <div className="ml-3 text-sm">
                                         <label htmlFor="comments" className="font-medium text-gray-700">
-                                            I agree to Terms and Conditions and Privacy Policy
+                                            I agree to Terms and Conditions and
                                         </label>
+                                        <a className='text-blue-600' href="/privacy-policy" target="_blank" rel="noreferrer noopener">
+                                            Privacy Policy
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="relative flex items-start">
                                     <div className="flex items-center h-5">
                                         <input
-                                            id="candidates"
-                                            aria-describedby="candidates-description"
-                                            name="candidates"
+                                            name="notifications"
                                             type="checkbox"
                                             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                             {...register("acceptNotifications")}

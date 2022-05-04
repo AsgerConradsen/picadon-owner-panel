@@ -1,33 +1,10 @@
 
 /* This example requires Tailwind CSS v2.0+ */
 import { Link } from "react-router-dom";
-
 import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CheckCircleIcon } from '@heroicons/react/solid'
-import {
-    CalendarIcon,
-    ChartBarIcon,
-    FolderIcon,
-    HomeIcon,
-    InboxIcon,
-    MenuIcon,
-    UsersIcon,
-    XIcon,
-} from '@heroicons/react/outline'
-import {
-    ArrowNarrowLeftIcon,
-} from '@heroicons/react/solid'
 import Sidebar from '../components/sidebar'
-
-const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
+import TextInput from "../components/TextInput";
+import ImgDropzone from "../onboarding/components/imgDropzone";
 
 const steps = [
     { name: 'Property information', href: '#', status: 'current' },
@@ -50,14 +27,7 @@ export default function Example(props) {
 
     return (
         <>
-            {/*
-        This example requires updating your template:
 
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
             <div>
                 {<Sidebar steps={steps} />}
 
@@ -70,75 +40,49 @@ export default function Example(props) {
                                 <h2 className="text-l text-gray-500">Basic information about the property</h2>
                             </div>
                             <form className="max-w-xl px-4 sm:px-6 md:px-20">
-                                <div className='py-2'>
-                                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                                        Property name
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            id="address"
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder=""
-                                            {...register("example")}
-                                        />
+                                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <div className="mt-1 sm:mt-0 sm:col-span-3">
+                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                                            Marketplace name* (same as property name is recommended)
+                                        </label>
+                                        <div className="max-w-lg flex rounded-md shadow-sm">
+                                            <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                                app.picadon.io/
+                                            </span>
+                                            <input
+                                                type="text"
+                                                name="username"
+                                                id="username"
+                                                autoComplete="username"
+                                                className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                                <div className='py-2'>
-                                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                                        Address
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="address"
-                                            id="address"
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder="street, nr."
-                                            {...register("example")}
-                                        />
+                                <TextInput type="text" label="Property name*" name="name" error={props.errors?.name} register={props.register} />
+                                <TextInput type="text" label="Address*" name="address" error={props.errors?.address} register={props.register} />
+                                <TextInput type="text" label="Postal code*" name="postalCode" error={props.errors?.postalCode} register={props.register} />
+                                <TextInput type="text" label="City*" name="city" error={props.errors?.city} register={props.register} />
+
+                                {/* <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Image 1*" name="logoUrl" /> */}
+
+                                <div className="relative">
+                                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                        <div className="w-full border-t border-gray-300" />
                                     </div>
-                                </div>
-                                <div className='py-2'>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Postal code
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="cvr"
-                                            id="cvr"
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder=""
-                                        />
-                                    </div>
-                                </div>
-                                <div className='py-2'>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        City
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="text"
-                                            name="email"
-                                            id="email"
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder=""
-                                        />
+                                    <div className="relative flex justify-center">
+                                        <span className="px-2 bg-white text-sm text-gray-500">Contact person</span>
                                     </div>
                                 </div>
 
                                 <fieldset className="space-y-5">
-                                    <legend className="sr-only">Notifications</legend>
                                     <div className="relative flex items-start">
                                         <div className="flex items-center h-5">
                                             <input
-                                                id="comments"
-                                                aria-describedby="comments-description"
                                                 name="comments"
                                                 type="checkbox"
                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                {...register("sameContactPerson")}
                                             />
                                         </div>
                                         <div className="ml-3 text-sm">
@@ -148,7 +92,13 @@ export default function Example(props) {
                                         </div>
                                     </div>
                                 </fieldset>
-                                <h1 className=" mt-10 font-medium text-gray-700">Upload propert picture</h1>
+
+                                <TextInput type="text" label="Full name*" name="contactPersonFullName" error={props.errors?.contactPersonFullName} register={props.register} />
+                                <TextInput type="email" label="Email*" name="contactPersonEmail" error={props.errors?.contactPersonEmail} register={props.register} />
+                                <TextInput type="tel" label="Phone number*" name="contactPersonPhone" error={props.errors?.contactPersonPhone} register={props.register} />
+
+
+                                {/* <h1 className=" mt-10 font-medium text-gray-700">Upload propert picture</h1>
                                 <div className="mt-4 max-w-lg flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
                                         <svg
@@ -177,7 +127,7 @@ export default function Example(props) {
                                         </div>
                                         <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                     </div>
-                                </div>
+                                </div> */}
                                 <Link to="/create-marketplace/type">
                                     <span className='block'>
                                         <div className='pt-8'>
