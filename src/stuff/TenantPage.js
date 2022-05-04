@@ -52,7 +52,7 @@ export default function TenantPage() {
             })
         },
         {
-            onSuccess: (data, variables, context) => {
+            onSuccess: (data) => {
                 console.log(data.data)
                 // setGiftItems(data.data)
                 // setMarketplaces(data.data)

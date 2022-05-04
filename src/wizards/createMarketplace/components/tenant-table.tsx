@@ -12,7 +12,16 @@ const people = [
     // More people...
 ]
 
-export default function Example(props) {
+interface Props {
+    data: {
+        name: string,
+        address: string,
+        phone: string,
+        email: string
+    }[]
+}
+
+export const TenantPreviewTable: React.FC<Props> = (props) => {
     return (
         <div className="max-h-96 overflow-scroll">
             <div className="mt-8 flex flex-col">
@@ -23,7 +32,7 @@ export default function Example(props) {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            Name
+                                            Name.. TS virker
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Email

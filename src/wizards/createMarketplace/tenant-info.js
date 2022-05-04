@@ -20,7 +20,7 @@ import {
     XIcon,
 } from '@heroicons/react/outline'
 import Sidebar from '../components/sidebar'
-import TenantTable from './components/tenant-table'
+import {TenantPreviewTable} from './components/tenant-table';
 import Modal from './components/tenant-info-modal'
 
 const navigation = [
@@ -103,7 +103,7 @@ export default function Example(props) {
 
 
 
-                                {dataSet ? <TenantTable data={watchCsv} /> : null}
+                                {dataSet ? <TenantPreviewTable data={watchCsv} /> : null}
 
 
                                 <div className="mt-16 flex flex-row">
