@@ -23,42 +23,14 @@ import Sidebar from '../components/sidebar'
 import {TenantPreviewTable} from './components/tenant-table';
 import Modal from './components/tenant-info-modal'
 
-const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
 
-const product = {
-    name: 'Everyday Ruck Snack',
-    href: '#',
-    price: '$220',
-    description:
-        "Don't compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.",
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-featured-product-shot.jpg',
-    imageAlt: 'Light green canvas bag with black straps, handle, front zipper pouch, and drawstring top.',
-    breadcrumbs: [
-        { id: 1, name: 'Travel', href: '#' },
-        { id: 2, name: 'Bags', href: '#' },
-    ],
-    sizes: [
-        { name: 'Regular', description: 'With this, you get the full marketplace, including a white-labelled storefront for your tenants and API.' },
-        { name: 'API only', description: 'With this, you only get the API.' },
-    ],
-}
 
 const steps = [
-    { name: 'Property information', href: '#', status: 'complete' },
-    { name: 'Marketplace type', href: '#', status: 'complete' },
-    { name: 'Tenant information', href: '#', status: 'current' },
-    { name: 'Welcome bonus', href: '#', status: 'upcoming' },
-    { name: 'Welcome gift', href: '#', status: 'upcoming' },
-    { name: 'Product preview', href: '#', status: 'upcoming' },
-    { name: 'Gift configuration', href: '#', status: 'upcoming' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Property information', href: '/create-marketplace/property-info', status: 'complete' },
+    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
+    { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'current' },
+    { name: 'Wallets', href: '/create-marketplace/wallets', status: 'upcoming' },
+    { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
 ]
 
 function classNames(...classes) {
@@ -66,9 +38,7 @@ function classNames(...classes) {
 }
 
 export default function Example(props) {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [enabled, setEnabled] = useState(false)
-    const [selectedSize, setSelectedSize] = useState(product.sizes[0])
+
     const [dataSet, setDataSet] = useState(false)
 
     const watchCsv = props.watch("tenants");
@@ -114,7 +84,7 @@ export default function Example(props) {
                                         Back
                                     </Link>
                                     <Link
-                                        to={"/create-marketplace/financing"}
+                                        to={"/create-marketplace/wallets"}
                                         className="ml-12 w-24 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                                     >
                                         Next

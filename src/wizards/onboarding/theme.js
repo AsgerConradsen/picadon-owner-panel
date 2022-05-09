@@ -82,7 +82,7 @@ export default function Example(props) {
                             </div>
                             <form className="max-w-2xl px-4 sm:px-6 md:px-20">
                                 <ThemeBox register={props.register} control={props.control} />
-                                <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Image 1*" name="logoUrl" />
+                                <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Logo*" name="logoUrl" />
 
                                 <div>
                                     <Link to={'/register/account-info'}>

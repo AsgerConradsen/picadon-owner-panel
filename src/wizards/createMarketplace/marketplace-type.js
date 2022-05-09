@@ -18,14 +18,6 @@ import {
 } from '@heroicons/react/outline'
 import Sidebar from '../components/sidebar'
 
-const navigation = [
-    { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-    { name: 'Team', href: '#', icon: UsersIcon, current: false },
-    { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-    { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-    { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-]
 
 const product = {
     name: 'Everyday Ruck Snack',
@@ -46,22 +38,22 @@ const product = {
 }
 
 const steps = [
-    { name: 'Property information', href: '#', status: 'complete' },
-    { name: 'Marketplace type', href: '#', status: 'current' },
-    { name: 'Tenant information', href: '#', status: 'upcoming' },
-    { name: 'Welcome bonus', href: '#', status: 'upcoming' },
-    { name: 'Welcome gift', href: '#', status: 'upcoming' },
-    { name: 'Product preview', href: '#', status: 'upcoming' },
-    { name: 'Gift configuration', href: '#', status: 'upcoming' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Property information', href: '/create-marketplace/property-info', status: 'complete' },
+    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'current' },
+    { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'upcoming' },
+    { name: 'Wallets', href: '/create-marketplace/wallets', status: 'upcoming' },
+    { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
 ]
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function Example(props) {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    let register = props.register
     const [enabled, setEnabled] = useState(false)
+    const [enabled2, setEnabled2] = useState(false)
+    const [enabled3, setEnabled3] = useState(false)
     const [selectedSize, setSelectedSize] = useState(product.sizes[0])
 
     return (
@@ -121,6 +113,74 @@ export default function Example(props) {
                                         ))}
                                     </div>
                                 </RadioGroup>
+
+                                <Switch.Group as="div" className="flex items-center mt-8">
+                                    <Switch
+                                        checked={enabled}
+                                        onChange={setEnabled}
+                                        className={classNames(
+                                            enabled ? 'bg-indigo-600' : 'bg-gray-200',
+                                            'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                        )}
+                                        // {...register("giftsEnabled")}
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className={classNames(
+                                                enabled ? 'translate-x-5' : 'translate-x-0',
+                                                'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+                                            )}
+                                        />
+                                    </Switch>
+                                    <Switch.Label as="span" className="ml-3">
+                                        <span className="text-sm font-medium text-gray-900">Enable gifts module.&nbsp;&nbsp;</span>
+                                        <span className="text-sm text-gray-500">This allows you to send gifts and setup automated gifts for occassions such as move-in and birthdays.</span>
+                                    </Switch.Label>
+                                </Switch.Group>
+                                <Switch.Group as="div" className="flex items-center mt-8">
+                                    <Switch
+                                        checked={enabled2}
+                                        onChange={setEnabled2}
+                                        className={classNames(
+                                            enabled2 ? 'bg-indigo-600' : 'bg-gray-200',
+                                            'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                        )}
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className={classNames(
+                                                enabled2 ? 'translate-x-5' : 'translate-x-0',
+                                                'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+                                            )}
+                                        />
+                                    </Switch>
+                                    <Switch.Label as="span" className="ml-3">
+                                        <span className="text-sm font-medium text-gray-900">Enable 'Essentials' module.&nbsp;&nbsp;</span>
+                                        <span className="text-sm text-gray-500">With this, your tenants will have access to essential services that make their daily lives easier.</span>
+                                    </Switch.Label>
+                                </Switch.Group>
+                                <Switch.Group as="div" className="flex items-center mt-8">
+                                    <Switch
+                                        checked={enabled3}
+                                        onChange={setEnabled3}
+                                        className={classNames(
+                                            enabled3 ? 'bg-indigo-600' : 'bg-gray-200',
+                                            'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                        )}
+                                    >
+                                        <span
+                                            aria-hidden="true"
+                                            className={classNames(
+                                                enabled3 ? 'translate-x-5' : 'translate-x-0',
+                                                'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+                                            )}
+                                        />
+                                    </Switch>
+                                    <Switch.Label as="span" className="ml-3">
+                                        <span className="text-sm font-medium text-gray-900">Enable 'Experiences' module.&nbsp;&nbsp;</span>
+                                        <span className="text-sm text-gray-500">With this, your tenants will have access to fun local experiences and events.</span>
+                                    </Switch.Label>
+                                </Switch.Group>
 
 
                                 <div className="mt-16 flex flex-row">

@@ -12,6 +12,8 @@ import {
 } from '@heroicons/react/outline'
 import Sidebar from '../components/sidebar'
 import { Link } from "react-router-dom";
+import CancelOnboardingModal from './components/CancelOnboardingModal';
+import { useState } from 'react';
 
 
 const navigation = [
@@ -44,10 +46,13 @@ const steps = [
 
 
 export default function Example(props) {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     let register = props.register
 
+    const watchAcceptTerms = props.watch("acceptTerms");
     return (
         <div>
+            <CancelOnboardingModal open={isModalOpen} setOpen={setIsModalOpen} />
             {<Sidebar steps={steps} />}
             <div className="md:pl-72 flex flex-col flex-1">
                 <main className="flex-1">
@@ -57,28 +62,6 @@ export default function Example(props) {
                             <h2 className="text-l text-gray-500">Tell us who you are</h2>
                         </div>
                         <form className="max-w-xl px-4 sm:px-6 md:px-20">
-
-                            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Username
-                                </label>
-                                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div className="max-w-lg flex rounded-md shadow-sm">
-                                        <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                                            app.picadon.io/
-                                        </span>
-                                        <input
-                                            type="text"
-                                            name="username"
-                                            id="username"
-                                            autoComplete="username"
-                                            className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-
                             <TextInput type="text" label="Company name*" name="companyName" error={props.errors?.companyName} register={props.register} />
                             <TextInput type="text" label="CVR*" name="cvr" error={props.errors?.cvr} register={props.register} />
                             <TextInput type="email" label="Email*" name="email" error={props.errors?.email} register={props.register} />
@@ -121,7 +104,31 @@ export default function Example(props) {
                                     </div>
                                 </div>
                             </fieldset>
-                            <Link to={props.next}>
+                            <div className='flex flex-row'>
+                                <button
+                                    onClick={() => setIsModalOpen(true)}
+                                    type="button"
+                                    className="mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-slate-200 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                                >
+                                    Cancel
+                                </button>
+                                {watchAcceptTerms ?
+                                 <Link
+                                    to={props.next}
+                                    className="ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Next
+                                </Link> 
+                                : 
+                                <button
+                                    disabled={true}
+                                    className="opacity-40 ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    Next
+                                </button>}
+                                
+                            </div>
+                            {/* <Link to={props.next}>
                                 <span className='block'>
                                     <div className='pt-8'>
                                         <button
@@ -132,7 +139,7 @@ export default function Example(props) {
                                         </button>
                                     </div>
                                 </span>
-                            </Link>
+                            </Link> */}
                         </form>
                     </div>
                 </main>

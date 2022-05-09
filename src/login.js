@@ -14,7 +14,7 @@ import {
 } from 'react-query'
 
 export default function Example() {
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoginError, setIsLoginError] = useState(false)
 
 
@@ -27,12 +27,13 @@ export default function Example() {
             },
             onSuccess: (data, variables, context) => {
                 localStorage.setItem("token", data.data.token)
+                localStorage.setItem("logoUrl", data.data.config.logoUrl) 
                 let decoded = jwtDecode(data.data.token)
 
                 localStorage.setItem("token", data.data.token)
                 localStorage.setItem("userType", decoded.userType)
                 localStorage.setItem("user_id", decoded.user_id)
-                // setIsLoggedIn(true)
+                setIsLoggedIn(true)
             },
         }
     );
@@ -44,9 +45,9 @@ export default function Example() {
         mutation.mutate(formData);
     }
 
-    // if (isLoggedIn) {
-    //     return <Navigate to='/home' />
-    // }
+    if (isLoggedIn) {
+        return <Navigate to='/home' />
+    }
 
     return (
         <>

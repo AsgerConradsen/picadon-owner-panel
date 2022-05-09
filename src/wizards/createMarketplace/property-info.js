@@ -5,16 +5,14 @@ import { Fragment, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import TextInput from "../components/TextInput";
 import ImgDropzone from "../onboarding/components/imgDropzone";
+import CancelCreateMarketplaceModal from "./components/CancelCreateMarketplaceModal";
 
 const steps = [
-    { name: 'Property information', href: '#', status: 'current' },
-    { name: 'Marketplace type', href: '#', status: 'upcoming' },
-    { name: 'Tenant information', href: '#', status: 'upcoming' },
-    { name: 'Welcome bonus', href: '#', status: 'upcoming' },
-    { name: 'Welcome gift', href: '#', status: 'upcoming' },
-    { name: 'Product preview', href: '#', status: 'upcoming' },
-    { name: 'Gift configuration', href: '#', status: 'upcoming' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Property information', href: '/create-marketplace/property-info', status: 'current' },
+    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'upcoming' },
+    { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'upcoming' },
+    { name: 'Wallets', href: '/create-marketplace/wallets', status: 'upcoming' },
+    { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
 ]
 
 function classNames(...classes) {
@@ -22,13 +20,16 @@ function classNames(...classes) {
 }
 
 export default function Example(props) {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     let register = props.register
+
+    const watchSameContactPerson = props.watch("sameContactPerson");
 
     return (
         <>
 
             <div>
+                <CancelCreateMarketplaceModal open={isModalOpen} setOpen={setIsModalOpen} />
                 {<Sidebar steps={steps} />}
 
                 <div className="md:pl-72 flex flex-col flex-1">
@@ -43,7 +44,10 @@ export default function Example(props) {
                                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                     <div className="mt-1 sm:mt-0 sm:col-span-3">
                                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Marketplace name* (same as property name is recommended)
+                                            Marketplace web address*
+                                        </label>
+                                        <label htmlFor="email" className="block text-sm text-gray-500 mb-2">
+                                            This is the address your tenants see. We recommend to use the name of your property with any spaces replaced by dashes. Only lower case letters are allowed.
                                         </label>
                                         <div className="max-w-lg flex rounded-md shadow-sm">
                                             <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
@@ -51,12 +55,13 @@ export default function Example(props) {
                                             </span>
                                             <input
                                                 type="text"
-                                                name="username"
-                                                id="username"
-                                                autoComplete="username"
                                                 className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                                {...register("marketplaceWebAddress")}
                                             />
                                         </div>
+                                        <p className="mt-2 text-sm text-red-600">
+                                            {props.errors?.marketplaceWebAddress?.message}
+                                        </p>
                                     </div>
                                 </div>
                                 <TextInput type="text" label="Property name*" name="name" error={props.errors?.name} register={props.register} />
@@ -66,7 +71,7 @@ export default function Example(props) {
 
                                 {/* <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Image 1*" name="logoUrl" /> */}
 
-                                <div className="relative">
+                                <div className="relative mt-10 mb-7">
                                     <div className="absolute inset-0 flex items-center" aria-hidden="true">
                                         <div className="w-full border-t border-gray-300" />
                                     </div>
@@ -93,9 +98,13 @@ export default function Example(props) {
                                     </div>
                                 </fieldset>
 
-                                <TextInput type="text" label="Full name*" name="contactPersonFullName" error={props.errors?.contactPersonFullName} register={props.register} />
-                                <TextInput type="email" label="Email*" name="contactPersonEmail" error={props.errors?.contactPersonEmail} register={props.register} />
-                                <TextInput type="tel" label="Phone number*" name="contactPersonPhone" error={props.errors?.contactPersonPhone} register={props.register} />
+                                {!watchSameContactPerson ?
+                                    <>
+                                        <TextInput type="text" label="Full name*" name="contactPersonFullName" error={props.errors?.contactPersonFullName} register={props.register} />
+                                        <TextInput type="email" label="Email*" name="contactPersonEmail" error={props.errors?.contactPersonEmail} register={props.register} />
+                                        <TextInput type="tel" label="Phone number*" name="contactPersonPhone" error={props.errors?.contactPersonPhone} register={props.register} />
+                                    </>
+                                    : null}
 
 
                                 {/* <h1 className=" mt-10 font-medium text-gray-700">Upload propert picture</h1>
@@ -128,7 +137,25 @@ export default function Example(props) {
                                         <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                                     </div>
                                 </div> */}
-                                <Link to="/create-marketplace/type">
+                                <div className='flex flex-row'>
+                                    <button
+                                        onClick={() => setIsModalOpen(true)}
+                                        type="button"
+                                        className="mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-slate-200 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
+                                    >
+                                        Cancel
+                                    </button>
+ 
+                                        <Link
+                                            to={"/create-marketplace/type"}
+                                            className="ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                        >
+                                            Next
+                                        </Link>
+         
+
+                                </div>
+                                {/* <Link to="/create-marketplace/type">
                                     <span className='block'>
                                         <div className='pt-8'>
                                             <button
@@ -139,7 +166,7 @@ export default function Example(props) {
                                             </button>
                                         </div>
                                     </span>
-                                </Link>
+                                </Link> */}
                             </form>
                         </div>
                     </main>

@@ -27,14 +27,11 @@ const navigation = [
 ]
 
 const steps = [
-    { name: 'Property information', href: '#', status: 'complete' },
-    { name: 'Marketplace type', href: '#', status: 'complete' },
-    { name: 'Tenant information', href: '#', status: 'complete' },
-    { name: 'Wallets', href: '#', status: 'current' },
-    { name: 'Welcome gift', href: '#', status: 'upcoming' },
-    { name: 'Product preview', href: '#', status: 'upcoming' },
-    { name: 'Gift configuration', href: '#', status: 'upcoming' },
-    { name: 'Overview', href: '#', status: 'upcoming' },
+    { name: 'Property information', href: '/create-marketplace/property-info', status: 'complete' },
+    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
+    { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'complete' },
+    { name: 'Wallets', href: '/create-marketplace/wallets', status: 'current' },
+    { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
 ]
 
 function classNames(...classes) {
@@ -44,6 +41,7 @@ function classNames(...classes) {
 export default function Example(props) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [enabled, setEnabled] = useState(false)
+    const [enabled2, setEnabled2] = useState(false)
     let register = props.register
 
     return (
@@ -92,9 +90,11 @@ export default function Example(props) {
                                     </Switch.Label>
                                 </Switch.Group>
 
+                                {enabled ?
+                                <>
                                 <div className='py-2 mt-8'>
                                     <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                                        Welcome bonus amount
+                                        Welcome bonus amount (DKK)
                                     </label>
                                     <select
                                         id="location"
@@ -103,44 +103,26 @@ export default function Example(props) {
                                         defaultValue="0€"
                                         {...register("test")}
                                     >
-                                        <option>0€</option>
-                                        <option>50€</option>
-                                        <option>100€</option>
-                                        <option>200€</option>
-                                        <option>500€</option>
+                                        <option>250</option>
+                                        <option>500</option>
+                                        <option>1000</option>
                                     </select>
                                 </div>
-                                <div className='py-2 mt-2'>
-                                    <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                                        How do you want to notify the tenant?
-                                    </label>
-                                    <select
-                                        id="location"
-                                        name="location"
-                                        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                                        defaultValue="0€"
-                                    >
-                                        <option>I will handle the notifications myself</option>
-                                        <option>I want Picadon to send an email notification</option>
-                                    </select>
-                                </div>
-
-
-
+                             
 
                                 <Switch.Group as="div" className="flex items-center mt-8">
                                     <Switch
-                                        checked={enabled}
-                                        onChange={setEnabled}
+                                        checked={enabled2}
+                                        onChange={setEnabled2}
                                         className={classNames(
-                                            enabled ? 'bg-indigo-600' : 'bg-gray-200',
+                                            enabled2 ? 'bg-indigo-600' : 'bg-gray-200',
                                             'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                         )}
                                     >
                                         <span
                                             aria-hidden="true"
                                             className={classNames(
-                                                enabled ? 'translate-x-5' : 'translate-x-0',
+                                                enabled2 ? 'translate-x-5' : 'translate-x-0',
                                                 'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
                                             )}
                                         />
@@ -150,6 +132,9 @@ export default function Example(props) {
                                         <span className="text-sm text-gray-500">(If this is not set, only current tenants will get the bonus)</span>
                                     </Switch.Label>
                                 </Switch.Group>
+                                </>
+                                :
+                                null }
 
                                 <div className="mt-16 flex flex-row">
                                     <Link
@@ -159,7 +144,7 @@ export default function Example(props) {
                                         Back
                                     </Link>
                                     <Link
-                                        to={"/create-marketplace/welcome-gift"}
+                                        to={"/create-marketplace/overview"}
                                         className="ml-12 w-24 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                                     >
                                         Next

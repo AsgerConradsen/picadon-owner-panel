@@ -1,7 +1,7 @@
 import Onboarding from './wizards/onboarding/onboarding'
 
-import Stuff1 from './stuff/shell2'
-import CreateMarketplace from './wizards/createMarketplace/create-marketplace'
+import Stuff1 from './app/shell2'
+import { CreateMarketplaceWizard } from './wizards/createMarketplace/CreateMarketplaceWizard'
 import Financing from './wizards/createMarketplace/financing'
 import TenantInfo from './wizards/createMarketplace/tenant-info'
 import Login from './login'
@@ -40,7 +40,7 @@ function App() {
 
 
 
-        <Route exact path="/create-marketplace/*" element={<CreateMarketplace />} />
+        <Route exact path="/create-marketplace/*" element={<CreateMarketplaceWizard />} />
       </Routes>
     </Router>
   );
