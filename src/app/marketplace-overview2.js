@@ -86,7 +86,7 @@ export default function Example() {
             <div className='h-screen mt-7 bg-slate-100 px-5 py-5 rounded-lg'>
                 <div className="h-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
 
-                    <iframe className="w-full h-full object-center object-cover" src={`https://picadon-marketplace.herokuapp.com/marketplaces/${marketPlace.WebAddress}`}></iframe>
+                    <iframe className="w-full h-full object-center object-cover" src={`https://picadon-marketplace.herokuapp.com/${marketPlace.WebAddress}`}></iframe>
                 </div>
             </div>
 

@@ -47,15 +47,15 @@ export default function GiftsCatalogue(props) {
     return (
         <div className="bg-white">
             <div className="ml-8 mt-4 sm:flex sm:items-center">
-                    <div className="sm:flex-auto">
-                        <h1 className="text-xl font-semibold text-gray-900">Gaver</h1>
-                        <p className="mt-2 text-sm text-gray-700">
-                            Et overblik over de gaver du har mulighed for at give dine lejere.
-                        </p>
-                    </div>
+                <div className="sm:flex-auto">
+                    <h1 className="text-xl font-semibold text-gray-900">Gaver</h1>
+                    <p className="mt-2 text-sm text-gray-700">
+                        Et overblik over de gaver du har mulighed for at give dine lejere.
+                    </p>
                 </div>
+            </div>
             <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                
+
                 <h2 className="sr-only">Products</h2>
 
                 <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 ">
@@ -74,6 +74,16 @@ export default function GiftsCatalogue(props) {
                     ))}
                 </div>
             </div>
+
+
+            
+            <input
+                id="comments"
+                aria-describedby="comments-description"
+                name="comments"
+                type="checkbox"
+                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            />
         </div>
     )
 }

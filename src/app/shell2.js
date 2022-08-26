@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon, UserCircleIcon } from '@heroicons/react/outline'
+import { BellIcon, MenuIcon, XIcon, UserCircleIcon, GiftIcon } from '@heroicons/react/outline'
 
 import {
     BrowserRouter as Router,
@@ -19,7 +19,7 @@ import ProductPreview from './product-preview'
 import { ReactSVG } from 'react-svg'
 import { TenantPage } from './TenantPage';
 import EventsCatalogue from './EventsCatalogue';
-import GiftsCatalogue from './GiftsCatalogue';
+import GiftsCatalogue from './GiftConfiguration';
 
 const user = {
     name: 'Tom Cook',
@@ -28,8 +28,8 @@ const user = {
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-    { name: 'Marketplaces', href: '/home/marketplaces', current: true },
-    { name: 'Events', href: '/home/events', current: false },
+    { name: 'Markedspladser', href: '/home/marketplaces', current: true },
+    // { name: 'Events', href: '/home/events', current: false },
 ]
 // const userNavigation = [
 //     { name: 'Your Profile', href: '#' },
@@ -46,8 +46,8 @@ export default function Example() {
     let navigate = useNavigate();
 
     const userNavigation = [
-        { name: 'Sign out', action: () => { localStorage.clear(); navigate("/") }},
-        { name: 'AccountPage', action: () => { navigate('/home/account-page'); }}
+        { name: 'Sign out', action: () => { localStorage.clear(); navigate("/") } },
+        { name: 'AccountPage', action: () => { navigate('/home/account-page'); } }
     ]
 
 
@@ -55,7 +55,7 @@ export default function Example() {
         <>
 
             <div className="min-h-full">
-                <Disclosure as="nav" className="bg-indigo-600">
+                <Disclosure as="nav" style={{ backgroundColor: localStorage.getItem("color") ? localStorage.getItem("color") : "#4b5563" }}>
                     {({ open }) => (
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -77,9 +77,9 @@ export default function Example() {
                                                         key={index}
                                                         to={item.href}
                                                         className={({ isActive }) => classNames(isActive
-                                                            ? 'bg-indigo-700 text-white'
-                                                            : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                                                            'px-3 py-2 rounded-md text-sm font-medium')}
+                                                            ? 'border-white inline-flex border-b-2'
+                                                            : 'border-transparent hover:border-gray-100 inline-flex border-b',
+                                                            'px-1 pt-1 pb-1 text-sm font-medium items-center text-white')}
                                                     >
                                                         {item.name}
                                                     </NavLink>
@@ -89,18 +89,18 @@ export default function Example() {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-4 flex items-center md:ml-6">
-                                            <button
+                                            {/* <button
                                                 type="button"
-                                                className="p-1 bg-indigo-600 rounded-full text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white"
+                                                className="p-1 rounded-full text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white"
                                             >
                                                 <span className="sr-only">View notifications</span>
                                                 <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                            </button>
+                                            </button> */}
 
                                             {/* Profile dropdown */}
                                             <Menu as="div" className="ml-3 relative">
                                                 <div>
-                                                    <Menu.Button className="max-w-xs bg-indigo-600 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white">
+                                                    <Menu.Button className="max-w-xs rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-white">
                                                         <span className="sr-only">Open user menu</span>
                                                         <UserCircleIcon className="flex-shrink-0 h-6 w-6 text-white" aria-hidden="true" />
                                                     </Menu.Button>
@@ -137,7 +137,7 @@ export default function Example() {
                                     </div>
                                     <div className="-mr-2 flex md:hidden">
                                         {/* Mobile menu button */}
-                                        <Disclosure.Button className="bg-indigo-600 inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-500 hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white">
+                                        <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-opacity-75 focus:outline-none focus:ring-2 focus:ring-white">
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
                                                 <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -150,7 +150,7 @@ export default function Example() {
                             </div>
 
                             <Disclosure.Panel className="md:hidden">
-                                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                                <div className="px-8 pt-2 pb-3 space-y-1 sm:px-10">
                                     {navigation.map((item) => (
                                         <Disclosure.Button
                                             key={item.name}
@@ -158,9 +158,9 @@ export default function Example() {
                                             href={item.href}
                                             className={classNames(
                                                 item.current
-                                                    ? 'bg-indigo-700 text-white'
-                                                    : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                                                'block px-3 py-2 rounded-md text-base font-medium'
+                                                    ? 'border-b-2 text-white'
+                                                    : 'text-white hover:bg-opacity-75',
+                                                'block px-3 py-2 text-base font-medium'
                                             )}
                                             aria-current={item.current ? 'page' : undefined}
                                         >
@@ -168,23 +168,8 @@ export default function Example() {
                                         </Disclosure.Button>
                                     ))}
                                 </div>
-                                <div className="pt-4 pb-3 border-t border-indigo-700">
-                                    <div className="flex items-center px-5">
-                                        <div className="flex-shrink-0">
-                                            <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                                        </div>
-                                        <div className="ml-3">
-                                            <div className="text-base font-medium text-white">{user.name}</div>
-                                            <div className="text-sm font-medium text-indigo-300">{user.email}</div>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            className="ml-auto bg-indigo-600 flex-shrink-0 p-1 rounded-full text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white"
-                                        >
-                                            <span className="sr-only">View notifications</span>
-                                            <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                        </button>
-                                    </div>
+                                <div className="pt-4 pb-3 border-t">
+                                    {/*  */}
                                     <div className="mt-3 px-2 space-y-1">
                                         {userNavigation.map((item) => (
                                             <Disclosure.Button
@@ -206,7 +191,7 @@ export default function Example() {
 
 
 
-{/* 
+                {/* 
 
                 <Routes>
                     <Route path="/marketplaces" element={null} />

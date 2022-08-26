@@ -28,7 +28,7 @@ const navigation = [
 
 const steps = [
     { name: 'Property information', href: '/create-marketplace/property-info', status: 'complete' },
-    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
+    // { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
     { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'complete' },
     { name: 'Wallets', href: '/create-marketplace/wallets', status: 'current' },
     { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },

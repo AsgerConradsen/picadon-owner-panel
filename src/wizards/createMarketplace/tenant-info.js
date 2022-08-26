@@ -27,7 +27,7 @@ import Modal from './components/tenant-info-modal'
 
 const steps = [
     { name: 'Property information', href: '/create-marketplace/property-info', status: 'complete' },
-    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
+    // { name: 'Marketplace type', href: '/create-marketplace/type', status: 'complete' },
     { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'current' },
     { name: 'Wallets', href: '/create-marketplace/wallets', status: 'upcoming' },
     { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
@@ -78,7 +78,7 @@ export default function Example(props) {
 
                                 <div className="mt-16 flex flex-row">
                                     <Link
-                                        to={"/create-marketplace/type"}
+                                        to={"/create-marketplace/property-info"}
                                         className="w-24 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-slate-200 hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
                                     >
                                         Back

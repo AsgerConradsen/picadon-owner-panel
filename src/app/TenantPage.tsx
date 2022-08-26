@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 // import { TenantTable } from './TenantTable';
-import TenantTable from './TenantTable_new';
+import TenantTable from './TenantTable';
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query';
 import axios from 'axios';
@@ -42,7 +42,7 @@ export const TenantPage: React.FC<Props> = (props) => {
     const [isError, setIsError] = useState(false)
 
     const { isLoading: isLoadingTutorials } = useQuery(
-        "get items",
+        "get tenants",
         async () => {
             const token = localStorage.getItem("token");
             const user_id = localStorage.getItem("user_id");

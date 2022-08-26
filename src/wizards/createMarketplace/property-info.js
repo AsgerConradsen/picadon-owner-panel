@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { Fragment, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import TextInput from "../components/TextInput";
-import ImgDropzone from "../onboarding/components/imgDropzone";
 import CancelCreateMarketplaceModal from "./components/CancelCreateMarketplaceModal";
+import ImgDropzone from "../onboarding/components/imgDropzone";
 
 const steps = [
     { name: 'Property information', href: '/create-marketplace/property-info', status: 'current' },
-    { name: 'Marketplace type', href: '/create-marketplace/type', status: 'upcoming' },
+    // { name: 'Marketplace type', href: '/create-marketplace/type', status: 'upcoming' },
     { name: 'Tenant information', href: '/create-marketplace/tenant-info', status: 'upcoming' },
     { name: 'Wallets', href: '/create-marketplace/wallets', status: 'upcoming' },
     { name: 'Overview', href: '/create-marketplace/overview', status: 'upcoming' },
@@ -24,6 +24,7 @@ export default function Example(props) {
     let register = props.register
 
     const watchSameContactPerson = props.watch("sameContactPerson");
+    const watchBgImg = props.watch("bgImg")
 
     return (
         <>
@@ -37,17 +38,17 @@ export default function Example(props) {
                         <div className="py-6 flex flex-col">
                             <div className="max-w-7xl px-4 py-8 sm:px-8 md:px-20">
 
-                                <h1 className="text-2xl font-semibold text-gray-900">Property Info</h1>
-                                <h2 className="text-l text-gray-500">Basic information about the property</h2>
+                                <h1 className="text-2xl font-semibold text-gray-900">Ejendom information</h1>
+                                <h2 className="text-l text-gray-500">Lidt information om den ejendom markedsplads skal høre til</h2>
                             </div>
                             <form className="max-w-xl px-4 sm:px-6 md:px-20">
                                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                     <div className="mt-1 sm:mt-0 sm:col-span-3">
                                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                            Marketplace web address*
+                                            Markedsplads web adresse*
                                         </label>
                                         <label htmlFor="email" className="block text-sm text-gray-500 mb-2">
-                                            This is the address your tenants see. We recommend to use the name of your property with any spaces replaced by dashes. Only lower case letters are allowed.
+                                            Det her er den web adresse dine lejere vil se. Vi anbefaler at bruge navnet på din ejendom med eventuelle mellemrum erstattet af bindestreger.
                                         </label>
                                         <div className="max-w-lg flex rounded-md shadow-sm">
                                             <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
@@ -64,10 +65,10 @@ export default function Example(props) {
                                         </p>
                                     </div>
                                 </div>
-                                <TextInput type="text" label="Property name*" name="name" error={props.errors?.name} register={props.register} />
-                                <TextInput type="text" label="Address*" name="address" error={props.errors?.address} register={props.register} />
-                                <TextInput type="text" label="Postal code*" name="postalCode" error={props.errors?.postalCode} register={props.register} />
-                                <TextInput type="text" label="City*" name="city" error={props.errors?.city} register={props.register} />
+                                <TextInput type="text" label="Ejendom navn*" name="name" error={props.errors?.name} register={props.register} />
+                                <TextInput type="text" label="Adresse*" name="address" error={props.errors?.address} register={props.register} />
+                                <TextInput type="text" label="Post nummer*" name="postalCode" error={props.errors?.postalCode} register={props.register} />
+                                <TextInput type="text" label="By*" name="city" error={props.errors?.city} register={props.register} />
 
                                 {/* <ImgDropzone watch={watchLogo} setValue={props.setValue} label="Image 1*" name="logoUrl" /> */}
 
@@ -76,7 +77,7 @@ export default function Example(props) {
                                         <div className="w-full border-t border-gray-300" />
                                     </div>
                                     <div className="relative flex justify-center">
-                                        <span className="px-2 bg-white text-sm text-gray-500">Contact person</span>
+                                        <span className="px-2 bg-white text-sm text-gray-500">Kontakt person</span>
                                     </div>
                                 </div>
 
@@ -92,7 +93,7 @@ export default function Example(props) {
                                         </div>
                                         <div className="ml-3 text-sm">
                                             <label htmlFor="comments" className="font-medium text-gray-700">
-                                                Same primary contact person for this building as for this account
+                                                Samme kontakt person som for denne konto
                                             </label>
                                         </div>
                                     </div>
@@ -100,11 +101,31 @@ export default function Example(props) {
 
                                 {!watchSameContactPerson ?
                                     <>
-                                        <TextInput type="text" label="Full name*" name="contactPersonFullName" error={props.errors?.contactPersonFullName} register={props.register} />
+                                        <TextInput type="text" label="Fulde navn*" name="contactPersonFullName" error={props.errors?.contactPersonFullName} register={props.register} />
                                         <TextInput type="email" label="Email*" name="contactPersonEmail" error={props.errors?.contactPersonEmail} register={props.register} />
-                                        <TextInput type="tel" label="Phone number*" name="contactPersonPhone" error={props.errors?.contactPersonPhone} register={props.register} />
+                                        <TextInput type="tel" label="Tlf nr*" name="contactPersonPhone" error={props.errors?.contactPersonPhone} register={props.register} />
                                     </>
-                                    : null}
+                                    :
+                                    null
+                                }
+
+                                <div className="relative mt-10 mb-7">
+                                    <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                        <div className="w-full border-t border-gray-300" />
+                                    </div>
+                                    {/* <div className="relative flex justify-center">
+                                        <span className="px-2 bg-white text-sm text-gray-500">Kontakt person</span>
+                                    </div> */}
+                                </div>
+
+
+                                {/* <div className="pt-10">
+                                    <ImgDropzone color={"#fff"} watch={watchBgImg} setValue={props.setValue} label="Billede af ejendom*" name="bgImg" />
+                                </div> */}
+
+
+
+
 
 
                                 {/* <h1 className=" mt-10 font-medium text-gray-700">Upload propert picture</h1>
@@ -145,14 +166,14 @@ export default function Example(props) {
                                     >
                                         Cancel
                                     </button>
- 
-                                        <Link
-                                            to={"/create-marketplace/type"}
-                                            className="ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        >
-                                            Next
-                                        </Link>
-         
+
+                                    <Link
+                                        to={"/create-marketplace/tenant-info"}
+                                        className="ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    >
+                                        Næste
+                                    </Link>
+
 
                                 </div>
                                 {/* <Link to="/create-marketplace/type">

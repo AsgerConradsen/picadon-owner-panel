@@ -34,7 +34,7 @@ export default function Example() {
 
 
             if (!token || !user_id) {
-                alert("Session expired. Please login again")
+                // alert("Session expired. Please login again")
                 navigate("/")
                 return
             }
@@ -42,14 +42,14 @@ export default function Example() {
             let decoded = jwtDecode(token)
 
             if (decoded.exp * 1000 < Date.now()) {
-                alert("Session expired. Please login again")
+                // alert("Session expired. Please login again")
                 navigate("/")
                 return
             }
 
 
             // return await  apiClient.get(`/sellers/${localStorage.getItem("user_id")}/products`);
-            return axios.get(`https://picadon-server-1.herokuapp.com/owners/${localStorage.getItem("user_id")}/marketplaces`, {
+            return axios.get(`https://picadon-server.herokuapp.com/owners/${localStorage.getItem("user_id")}/marketplaces`, {
                 headers: {
                     "Content-type": "application/json",
                     'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -75,8 +75,8 @@ export default function Example() {
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
                     <h1 className="text-xl font-semibold text-gray-900">Marketplaces</h1>
-                    <p className="mt-2 text-sm text-gray-700">
-                        An overview of all you marketplaces
+                    <p className="mt-2 text-sm text-gray-700">                        
+                        An overview of your marketplaces. You can create new ones here as well.
                     </p>
                 </div>
                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
@@ -84,7 +84,7 @@ export default function Example() {
                         to={"/create-marketplace/property-info"}
                         className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                     >
-                        Create Marketplace
+                        Create marketplace
                     </Link>
                 </div>
             </div>
@@ -96,7 +96,7 @@ export default function Example() {
                                 <thead className="bg-gray-50">
                                     <tr>
                                         <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                                            Navn
+                                            Name
                                         </th>
                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                             Link
@@ -117,7 +117,7 @@ export default function Example() {
                                                     <div className="h-10 w-10 flex-shrink-0">
                                                         {/* <img className="h-10 w-10 rounded-full" src={person.image} alt="" /> */}
                                                     </div>
-                                                    <div className="ml-2">
+                                                    <div className="">
                                                         <div className="font-medium text-gray-900">{marketplace.Name}</div>
                                                         {/* <div className="text-gray-500">{person.email}</div> */}
                                                     </div>

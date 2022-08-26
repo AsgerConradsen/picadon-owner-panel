@@ -28,9 +28,9 @@ export default function Example() {
             onSuccess: (data, variables, context) => {
                 localStorage.setItem("token", data.data.token)
                 localStorage.setItem("logoUrl", data.data.config.logoUrl) 
-                let decoded = jwtDecode(data.data.token)
+                localStorage.setItem("color", data.data.config.color) 
 
-                localStorage.setItem("token", data.data.token)
+                let decoded = jwtDecode(data.data.token)
                 localStorage.setItem("userType", decoded.userType)
                 localStorage.setItem("user_id", decoded.user_id)
                 setIsLoggedIn(true)
@@ -59,11 +59,11 @@ export default function Example() {
                             src={Logo}
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Log ind som udlejer</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            Or{' '}
+                            eller{' '}
                             <a href="/register/account-info" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                click here to create a new one
+                                klik her for at oprette en konto
                             </a>
                         </p>
                     </div>
@@ -72,7 +72,7 @@ export default function Example() {
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
-                                    Email address
+                                    Email
                                 </label>
                                 <input
                                     id="email-address"
@@ -81,7 +81,7 @@ export default function Example() {
                                     autoComplete="email"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Email address"
+                                    placeholder="Email"
                                     {...register("email")}
                                 />
                             </div>
@@ -109,7 +109,7 @@ export default function Example() {
 
                             <div className="text-sm">
                                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
+                                    Glemt dit kodeord?
                                 </a>
                             </div>
                         </div>
@@ -124,7 +124,7 @@ export default function Example() {
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                                 </span>
-                                Sign in
+                                Log ind
                             </button>
                         </div>
                         {/* </span>

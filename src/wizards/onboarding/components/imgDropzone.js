@@ -23,7 +23,7 @@ export default function ImgDropzone(props) {
             return
         }
         setImage(acceptedFiles[0]);
-        let res = await axios.get("https://picadon-server-1.herokuapp.com/presigned-upload-link");
+        let res = await axios.get("https://picadon-server.herokuapp.com/presigned-upload-link");
         if (res.status != 200) {
             //todo handle
         }
@@ -43,14 +43,14 @@ export default function ImgDropzone(props) {
 
 
     return (
-        <div className='my-4'>
+        <div className=''>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 {props.label}
             </label>
             <div className="w-full aspect-w-3 aspect-h-2 rounded-lg">
                 {props.watch ?
-                    <div>
-                        <Image className="w-full h-full object-center object-cover border-2 border-dashed border-gray-300 rounded-lg" noLazyLoad  src={props.watch} retry={{ count: 10, delay: 1 }} customPlaceholder={ ref => <div className="border-2 border-dashed border-gray-300 rounded-lg grid place-items-center h-full">Loading...</div> } />
+                    <div style={{backgroundColor: props.color}}>
+                        <Image className="w-full h-full object-center object-contain border-2 border-dashed border-gray-300 rounded-lg" noLazyLoad src={props.watch} retry={{ count: 10, delay: 1 }} customPlaceholder={ref => <div className="border-2 border-dashed border-gray-300 rounded-lg grid place-items-center h-full">Loading...</div>} />
                         {/* <button className="w-8 h-8 absolute top-0 bg-red-600 rounded-full">X</button> */}
                         <button
                             onClick={() => chooseNew()}
@@ -81,7 +81,7 @@ export default function ImgDropzone(props) {
                                     </svg>
                                     <input {...getInputProps()} />
                                     <p className='text-md text-gray-500' >Drag and drop, or click to select an image</p>
-                                    <p className="text-xs text-gray-500">PNG, JPG, GIF</p>
+                                    <p className="text-xs text-gray-500">PNG, JPG</p>
                                 </div>
                             </div>
                         )}

@@ -37,9 +37,9 @@ function classNames(...classes) {
 }
 
 const steps = [
-    { name: 'Account Info', href: '/register/account-info', status: 'current' },
-    { name: 'Theme', href: '/register/theme', status: 'upcoming' },
-    { name: 'Overview', href: '/register/overview', status: 'upcoming' },
+    { name: 'Generel information', href: '/register/account-info', status: 'current' },
+    { name: 'Design', href: '/register/theme', status: 'upcoming' },
+    { name: 'Oversigt', href: '/register/overview', status: 'upcoming' },
 ]
 
 
@@ -58,14 +58,14 @@ export default function Example(props) {
                 <main className="flex-1">
                     <div className="py-6 flex flex-col">
                         <div className="max-w-7xl px-4 py-8 sm:px-8 md:px-20">
-                            <h1 className="text-2xl font-semibold text-gray-900">Account Info</h1>
-                            <h2 className="text-l text-gray-500">Tell us who you are</h2>
+                            <h1 className="text-2xl font-semibold text-gray-900">Generel information</h1>
+                            <h2 className="text-l text-gray-500">Om din virksomhed og kontakt information</h2>
                         </div>
                         <form className="max-w-xl px-4 sm:px-6 md:px-20">
-                            <TextInput type="text" label="Company name*" name="companyName" error={props.errors?.companyName} register={props.register} />
+                            <TextInput type="text" label="Firmanavn*" name="companyName" error={props.errors?.companyName} register={props.register} />
                             <TextInput type="text" label="CVR*" name="cvr" error={props.errors?.cvr} register={props.register} />
                             <TextInput type="email" label="Email*" name="email" error={props.errors?.email} register={props.register} />
-                            <TextInput type="tel" label="Phone number*" name="phoneNumber" error={props.errors?.phoneNumber} register={props.register} />
+                            <TextInput type="tel" label="Tlf nr*" name="phoneNumber" error={props.errors?.phoneNumber} register={props.register} />
                             <TextInput type="password" label="Password*" name="password" error={props.errors?.password} register={props.register} />
 
                             <fieldset className="space-y-5">
@@ -81,26 +81,11 @@ export default function Example(props) {
                                     </div>
                                     <div className="ml-3 text-sm">
                                         <label htmlFor="comments" className="font-medium text-gray-700">
-                                            I agree to Terms and Conditions and
+                                            Jeg accepterer Terms and Conditions og {' '}
                                         </label>
                                         <a className='text-blue-600' href="/privacy-policy" target="_blank" rel="noreferrer noopener">
                                             Privacy Policy
                                         </a>
-                                    </div>
-                                </div>
-                                <div className="relative flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input
-                                            name="notifications"
-                                            type="checkbox"
-                                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                            {...register("acceptNotifications")}
-                                        />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="candidates" className="font-medium text-gray-700">
-                                            I agree to receive notifications
-                                        </label>
                                     </div>
                                 </div>
                             </fieldset>
@@ -117,14 +102,14 @@ export default function Example(props) {
                                     to={props.next}
                                     className="ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
-                                    Next
+                                    Næste
                                 </Link> 
                                 : 
                                 <button
                                     disabled={true}
                                     className="opacity-40 ml-7 mt-8 w-1/4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
-                                    Next
+                                    Næste
                                 </button>}
                                 
                             </div>

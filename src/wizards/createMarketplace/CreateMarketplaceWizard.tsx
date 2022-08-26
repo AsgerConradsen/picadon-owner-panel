@@ -93,8 +93,8 @@ export const CreateMarketplaceWizard: React.FC<Props> = (props) =>  {
 
     return (
         <Routes>
-            <Route path="/property-info" element={<PropertyInfo errors={errors} watch={watch} handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />} />
-            <Route path="/type" element={<MarketplaceType handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />} />
+            <Route path="/property-info" element={<PropertyInfo errors={errors} watch={watch} setValue={setValue} handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />} />
+            {/* <Route path="/type" element={<MarketplaceType handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} />} /> */}
             <Route path="/tenant-info" element={<TenantInfo errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} watch={watch} setValue={setValue} />} />
             <Route path="/wallets" element={<Financing handleSubmit={handleSubmit} onSubmit={onSubmit} register={register} control={control} />} />
             <Route path="/overview" element={<Overview errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit} modalOpen={modalOpen} watch={watch}/>} />

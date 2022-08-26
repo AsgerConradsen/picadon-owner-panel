@@ -45,11 +45,11 @@ export const AccountCreatedModal: React.FC<Props> = (props) =>  {
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                                        Account created
+                                        Konto oprettet
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Your account at Picadon is now created and you are ready to log in.
+                                            Din Picadon konto er nu oprettet og du er klar til at logge ind.
                                         </p>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@ export const AccountCreatedModal: React.FC<Props> = (props) =>  {
                                     to="/"
                                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                                 >
-                                    Go to log in
+                                    Log ind
                                 </Link>
                             </div>
                         </div>
